@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>new String(&quot;a&quot;) + new String(&quot;b&quot;)会创建几个对象 | KONA's BLOG</title><meta name="author" content="KONA"><meta name="copyright" content="KONA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="来拓展一下new String(&quot;a&quot;)会创建几个对象的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="new String(&quot;a&quot;) + new String(&quot;b&quot;)会创建几个对象">
+<meta property="og:url" content="http://example.com/post/36423276.html">
+<meta property="og:site_name" content="KONA&#39;s BLOG">
+<meta property="og:description" content="来拓展一下new String(&quot;a&quot;)会创建几个对象的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/06/11/dSkxwmAtNGUIqOE.jpg">
+<meta property="article:published_time" content="2022-12-03T20:15:24.000Z">
+<meta property="article:modified_time" content="2022-12-03T20:15:24.000Z">
+<meta property="article:author" content="KONA">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/06/11/dSkxwmAtNGUIqOE.jpg"><link rel="shortcut icon" href="/img/coding.png"><link rel="canonical" href="http://example.com/post/36423276.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'new String("a") + new String("b")会创建几个对象',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-12-03 20:15:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/06/11/dSkxwmAtNGUIqOE.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="KONA's BLOG"><span class="site-name">KONA's BLOG</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">new String(&quot;a&quot;) + new String(&quot;b&quot;)会创建几个对象</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-12-03T20:15:24.000Z" title="Created 2022-12-03 20:15:24">2022-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-12-03T20:15:24.000Z" title="Updated 2022-12-03 20:15:24">2022-12-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="new String(&quot;a&quot;) + new String(&quot;b&quot;)会创建几个对象"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>new String(“a”)想必大家都知道会创建两个对象，一个是new新建的对象，另一个是如果字符串常量池中没有”a”的话，那么就会创建一个。</p>
+<p>但是如果是new String(“a”) + new String(“b”)，这会创建几个对象，是四个么？</p>
+<p>我们可以直接查看一下它的字节码文件</p>
+<p><img src="https://s2.loli.net/2023/06/11/imTJ6wed57Mhg2t.png" alt="image.png"></p>
+<p>从字节码文件中，我们可以很清晰的看见它创建了几个对象</p>
+<p>第一个对象，new StringBuilder()</p>
+<p>第二个对象，new String()</p>
+<p>第三个对象，字符串常量池中的”a”</p>
+<p>第四个对象，new Sting()</p>
+<p>第五个对象，字符串常量池中的”b”</p>
+<p>那么，就是五个了么，其实不然，我们可以看到在31的位置，StringBuilder进行了toString操作，我们来看一下它的字节码文件</p>
+<p><img src="https://s2.loli.net/2023/06/11/vaqUZhoWBzkRu8P.png" alt="image.png"></p>
+<p>很明显，第一行就进行了一个new String的操作，而这就是第六个对象了</p>
+<p>那么，字符串常量池中会不会有”ab”呢？</p>
+<p>答案是，并没有，我们来看一下源码</p>
+<p><img src="https://s2.loli.net/2023/06/11/86snD7ExqZHzJ5v.png" alt="image.png"></p>
+<p>这里的new String里，传入的参数是一个char数组，并且从字节码文件中，我们也可以看出，并没有<code>ldc</code> ab，所以，字符串常量池中并没有”ab”</p>
+<p>那么，最终就是一共创建了六个对象。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">KONA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/post/36423276.html">http://example.com/post/36423276.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/JVM/">JVM</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/06/11/dSkxwmAtNGUIqOE.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/4727b650.html" title="Git在IDEA中的使用"><img class="cover" src="https://s2.loli.net/2023/06/07/OjnktaUX4NViPZH.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Git在IDEA中的使用</div></div></a></div><div class="next-post pull-right"><a href="/post/3990b0b1.html" title="Docker使用本地仓库来构建镜像"><img class="cover" src="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Docker使用本地仓库来构建镜像</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/post/cb1bbe92.html" title="JVM的内存结构和内存模型"><img class="cover" src="https://s2.loli.net/2023/06/03/tspfvqFTRWherA9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-26</div><div class="title">JVM的内存结构和内存模型</div></div></a></div><div><a href="/post/48c92662.html" title="Bean的生命周期"><img class="cover" src="https://s2.loli.net/2023/06/03/a4dUSpDmHCZlJRK.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-11</div><div class="title">Bean的生命周期</div></div></a></div><div><a href="/post/7a230aab.html" title="API签名认证"><img class="cover" src="https://s2.loli.net/2023/06/08/o7yDBXxQHhjKbwl.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-21</div><div class="title">API签名认证</div></div></a></div><div><a href="/post/12f8e0eb.html" title="JMeter点击bin目录下的ApacheJMeter.jar无法启动"><img class="cover" src="https://s2.loli.net/2023/06/03/i1qxzaLofZSkCNP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-09</div><div class="title">JMeter点击bin目录下的ApacheJMeter.jar无法启动</div></div></a></div><div><a href="/post/7eecb4d4.html" title="使用Spring Boot Starter开发客户端SDK"><img class="cover" src="https://s2.loli.net/2023/06/08/Vln78REKhf4CgTe.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-03</div><div class="title">使用Spring Boot Starter开发客户端SDK</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KONA</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KONAKONA777"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KONAKONA777" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:KONA7@proton.me" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">广告位招租！！！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/b4a00f5a.html" title="Docker构建添加了IK分词器插件的ElasticSearch镜像"><img src="https://s2.loli.net/2023/06/03/z65ZFy34uBwpOTN.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker构建添加了IK分词器插件的ElasticSearch镜像"/></a><div class="content"><a class="title" href="/post/b4a00f5a.html" title="Docker构建添加了IK分词器插件的ElasticSearch镜像">Docker构建添加了IK分词器插件的ElasticSearch镜像</a><time datetime="2023-04-21T14:51:22.000Z" title="Created 2023-04-21 14:51:22">2023-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/9d62f4ef.html" title="Docker安装ElasticStack"><img src="https://s2.loli.net/2023/06/03/u9EGRxUnMgvHWVX.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker安装ElasticStack"/></a><div class="content"><a class="title" href="/post/9d62f4ef.html" title="Docker安装ElasticStack">Docker安装ElasticStack</a><time datetime="2023-04-12T12:30:22.000Z" title="Created 2023-04-12 12:30:22">2023-04-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/7a230aab.html" title="API签名认证"><img src="https://s2.loli.net/2023/06/08/o7yDBXxQHhjKbwl.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="API签名认证"/></a><div class="content"><a class="title" href="/post/7a230aab.html" title="API签名认证">API签名认证</a><time datetime="2023-03-21T12:23:24.000Z" title="Created 2023-03-21 12:23:24">2023-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/7eecb4d4.html" title="使用Spring Boot Starter开发客户端SDK"><img src="https://s2.loli.net/2023/06/08/Vln78REKhf4CgTe.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用Spring Boot Starter开发客户端SDK"/></a><div class="content"><a class="title" href="/post/7eecb4d4.html" title="使用Spring Boot Starter开发客户端SDK">使用Spring Boot Starter开发客户端SDK</a><time datetime="2023-03-03T20:15:24.000Z" title="Created 2023-03-03 20:15:24">2023-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/cb1bbe92.html" title="JVM的内存结构和内存模型"><img src="https://s2.loli.net/2023/06/03/tspfvqFTRWherA9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM的内存结构和内存模型"/></a><div class="content"><a class="title" href="/post/cb1bbe92.html" title="JVM的内存结构和内存模型">JVM的内存结构和内存模型</a><time datetime="2023-02-26T21:30:24.000Z" title="Created 2023-02-26 21:30:24">2023-02-26</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg, #E2B0FF 10%, #9F44D3 100%)"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By KONA</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline77.vercel.app/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css','waline-css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
